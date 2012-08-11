@@ -3,7 +3,9 @@ var expect = require('chai').expect
 var runAsExample = typeof describe !== 'function'
 
 if(runAsExample){
-  describe =  function(n, f){ f() }
+  describe =  function(n, f){
+    f()
+  }
   it = function(n, f){ f() }
 }
 
@@ -14,8 +16,14 @@ var truthRow = function(gate, name) {
   var assert = function(g) {
     if(runAsExample) {
       console.log(name+' '+x.toString())
+      try {
+        expect(g).to.equal(expected)
+      } catch(e) {
+        console.error("^^^ "+e.message)
+      }
+    } else {
+      expect(g).to.equal(expected)
     }
-    expect(g).to.equal(expected)
   }
   var x = new gate()
   x[args.length].subscribe(assert)

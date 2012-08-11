@@ -1,6 +1,6 @@
-# NoR
+# NoR - There's No Return.
 
-A reactive programming engine.
+A reactive programming engine for javascript.
 
 ## Getting Started
 ### On the server
@@ -53,5 +53,5 @@ _Also, please don't edit files in the "dist" subdirectory as they are generated 
 _(Nothing yet)_
 
 ## License
-Copyright (c) 2012 Victor Borja  
+Copyright (c) 2012 Victor Borja
 Licensed under the MIT license.

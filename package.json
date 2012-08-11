@@ -1,0 +1,35 @@
+{
+  "name": "NoR",
+  "description": "A reactive programming engine.",
+  "version": "0.0.0",
+  "homepage": "http://vic.github.com/NoR",
+  "author": {
+    "name": "Victor Borja",
+    "email": "vborja@apache.org",
+    "url": "http://twitter.com/vborja"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vic/NoR.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vic/NoR/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://vic.github.com/NoR/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "lib/NoR",
+  "engines": {
+    "node": "*"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt": "~0.3.12"
+  },
+  "keywords": []
+}

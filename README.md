@@ -73,9 +73,9 @@ to be called on success and/or error.
 ```javascript
 var complex = function(some, thing, callback){
    if(everythingGoesFine) {
-     callback(successValue, errorValue)
-   } else {
      callback(successValue, null)
+   } else {
+     callback(null, errorValue)
    }
 }
 ```

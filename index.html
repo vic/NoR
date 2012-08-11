@@ -8,14 +8,14 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
-    <title>Nor by vic</title>
+    <title>NoR by vic</title>
   </head>
 
   <body>
 
     <header>
       <div class="container">
-        <h1>Nor</h1>
+        <h1>NoR</h1>
         <h2>There's No Return. A javascript reactive programming engine.</h2>
 
         <section id="downloads">
@@ -33,6 +33,204 @@
 <p>A reactive programming engine for javascript.</p>
 
 <h2>Getting Started</h2>
+
+<p>So what's <code>NoR</code> about?, well, simply put it's just my take at what I
+learned to be <code>reactive programming</code> yet i'm not an expert at all.</p>
+
+<p>Even though the term <code>reactive</code> might seem like unknown, most of us
+already interact with a reactive system all the time.</p>
+
+<p>When you open your spreadsheet program and start using formulas that
+use values from other cells, you can observe that if you change a
+value in one of that cells all other cells that depend on it get
+updated accordingly, well, spreadsheets are one example of
+<code>reactive programming</code>.</p>
+
+<p>If you ever played around with protoboards and logic gates, you can
+recall that you used to connect all those little gates to achieve
+something, say a counter, a clock or any other digital system, well,
+that's also <code>reactive</code>, as soon as you connect all the pieces and
+throw a little voltage at it, you get it to work (or not :D).</p>
+
+<p>In our days, we see <code>reactive</code> systems all around, in recent web
+development people are using more and more javascript, and as many
+of us have found, front-end development is almost always enterely
+event based, that is, when something changes, you have to <code>react</code>.
+A lot of libraries handle reacting to changes, from using
+[jQuery][jquery] to act upon a browser event, [Backbone.js][backbone]
+and [Knockout.js][knockout] to bind your view and model, etc.</p>
+
+<p>[jquery] <a href="http://jquery.com">http://jquery.com</a>
+[knockout] <a href="http://knokoutjs.com">http://knokoutjs.com</a>
+[backbone] <a href="http://backbone.org">http://backbone.org</a></p>
+
+<h2>There's No Return</h2>
+
+<p>Ok, so imagine you build a little logic gate (the [NOR gate][nor])</p>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/c/c6/NOR_ANSI_Labelled.svg" alt="The NOR logic gate"></p>
+
+<p>If we try to implement it on javascript, provably it would be like this:</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">NOR</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">q</span> <span class="o">=</span> <span class="o">!</span><span class="p">(</span><span class="nx">a</span> <span class="o">||</span> <span class="nx">b</span><span class="p">);</span> <span class="c1">// just for you to see a, b and q</span>
+  <span class="k">return</span> <span class="nx">q</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>so far so good, well, implementing the <code>NOR</code> gate is a trivial
+program. But what happens with more complex functions that can
+possibly fail, in you javascript programming, have you ever seen
+functions like the following?:</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">complex</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">some</span><span class="p">,</span> <span class="nx">thing</span><span class="p">){</span>
+   <span class="c1">// if everything goes fine, we return a value</span>
+   <span class="c1">// otherwise the make function will just</span>
+   <span class="c1">// throw an exception, how else do we handle failure?</span>
+   <span class="k">return</span> <span class="nx">make</span><span class="p">(</span><span class="nx">some</span><span class="p">,</span> <span class="nx">thing</span><span class="p">,</span> <span class="nx">strange</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>the bad thing about functions like this is that its users need to
+know that it can possibly throw an exception as means of handling
+failure, (would you really throw an exception just because some value
+doesnt have the form you expected? please dont!). To fix this, most
+people give the complex function a callback (or a pair of callbacks)
+to be called on success and/or error.</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">complex</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">some</span><span class="p">,</span> <span class="nx">thing</span><span class="p">,</span> <span class="nx">callback</span><span class="p">){</span>
+   <span class="k">if</span><span class="p">(</span><span class="nx">everythingGoesFine</span><span class="p">)</span> <span class="p">{</span>
+     <span class="nx">callback</span><span class="p">(</span><span class="nx">successValue</span><span class="p">,</span> <span class="nx">errorValue</span><span class="p">)</span>
+   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+     <span class="nx">callback</span><span class="p">(</span><span class="nx">successValue</span><span class="p">,</span> <span class="kc">null</span><span class="p">)</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>You see? now <em>There's No Return</em>. All the function does is do its
+amazing stuff and invoke the callback accordingly. But again as user
+of this function you need to know that callback can take two arguments
+and not just only one, or you can make the complex function take two
+callbacks one for success and one for error. That is a callback for
+each output the function can have.</p>
+
+<p>How does this all relates to <code>NoR</code> and <code>reactive programming</code>?, read on.</p>
+
+<p>[nor] <a href="http://en.wikipedia.org/wiki/NOR_logic">http://en.wikipedia.org/wiki/NOR_logic</a></p>
+
+<h2>Reacting to change</h2>
+
+<p>Suppose we try to implement our <code>NOR</code> logic gate again wihout using
+return.</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">NOR</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">q</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">q</span><span class="p">(</span> <span class="o">!</span><span class="p">(</span> <span class="nx">a</span> <span class="o">||</span> <span class="nx">b</span> <span class="p">)</span> <span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>So now our function takes two values <code>a</code> and <code>b</code> and a callback
+function <code>q</code>. <em>Every time you invoke</em> this function you give it two
+values and maybe a different callback. It doenst still reacts to
+change automatically, whenever the value of <code>a</code> or <code>b</code> change you
+have to apply them to the function.</p>
+
+<p>The logic gates (or the spreadsheet formulas) react to changes on
+their input, and automatically produce a new value for them.</p>
+
+<p>Now image our same NOR implementation, but this time with <code>a</code> and
+<code>b</code> also being functions. These functions if given no arguments just
+give you the current <em>state</em> of each input, and our function looks like:</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">NOR</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">q</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">q</span><span class="p">(</span> <span class="o">!</span><span class="p">(</span> <span class="nx">a</span><span class="p">()</span> <span class="o">||</span> <span class="nx">b</span><span class="p">()</span> <span class="p">)</span> <span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+<h2>How does it works</h2>
+
+<p>Using the <code>NoR</code> function to create a <em>gate</em> that reacts
+to changes on its inputs, and our NOR gate is:</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">NOR</span> <span class="o">=</span> <span class="nx">NoR</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">q</span><span class="p">){</span>
+  <span class="nx">q</span><span class="p">(</span> <span class="o">!</span><span class="p">(</span> <span class="nx">a</span><span class="p">()</span> <span class="o">||</span> <span class="nx">b</span><span class="p">()</span> <span class="p">)</span> <span class="p">)</span>
+<span class="p">})</span>
+</pre></div>
+
+<p>Looks pretty much like our previous implementation, the only
+difference being that the function is wrapped with <code>NoR</code>.
+What <code>NoR</code> does is creating a <em>cell</em> for each function parameter.
+A <em>cell</em> is just something that looks like a function and serves to
+hold a value. When a cell is given no arguments, it just returns its
+current value, but when an argument is given to it, it sets its new
+value and notifies everyone interested on that cell of its change.
+In our example, <code>a</code>, <code>b</code> and <code>c</code> are cells, but only the first two are
+used as inputs, the third as an output.</p>
+
+<p>The return value of the <code>NoR</code> function also looks like a function:</p>
+
+<pre><code>; setting a = false b = true
+NOR(false, true) ; =&gt; undefined
+</code></pre>
+
+<p>However it doesnt act as one of those functions that return values or
+accept callbacks. What we have just did is simply setting the <code>a</code> <em>cell</em>
+to <code>true</code> and the <code>b</code> <em>cell</em> to <code>false</code>. The result ofhe operation is
+asynchronous, that is, we can be sure in what exact second we have the
+response. Instead we have to listen for changes on <code>c</code>by <em>subscribing</em>
+to it.</p>
+
+<p>For example:</p>
+
+<div class="highlight"><pre><span class="nx">NOR</span><span class="p">.</span><span class="nx">c</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">newC</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"OK, the new value of c is"</span><span class="p">,</span> <span class="nx">newC</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="nx">NOR</span><span class="p">.</span><span class="nx">b</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span> <span class="c1">// here we are changing just b</span>
+
+<span class="c1">// sometime in the future we see</span>
+<span class="c1">// a message printed to stdout.</span>
+</pre></div>
+
+<p>The <code>NoR</code> function form is:</p>
+
+<div class="highlight"><pre><span class="nx">NoR</span><span class="p">(</span><span class="nx">gate</span><span class="p">,</span> <span class="nx">optional_setup</span><span class="p">)</span>
+</pre></div>
+
+<p>Where <code>gate</code> is a function that receives <em>cells</em> and is invoked
+whenever one of them changes. And <code>optional_setup</code> can be a function
+that receives the same <em>cells</em> than <code>gate</code> for the sake of setting up
+cell subscriptions or creating inner gates.</p>
+
+<p>For example, to build an <code>XOR</code> gate using just the universal <code>NOR</code>
+gate, you can do:</p>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/f/f8/XNOR_using_NOR.svg" alt="Implementing a XNOR gate using NOR gates"></p>
+
+<div class="highlight"><pre><span class="c1">// The universal NOR logic gate.</span>
+<span class="kd">var</span> <span class="nx">NOR</span> <span class="o">=</span> <span class="nx">NoR</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">g</span><span class="p">){</span>
+  <span class="nx">g</span><span class="p">(</span> <span class="o">!</span><span class="p">(</span> <span class="nx">a</span><span class="p">()</span> <span class="o">||</span> <span class="nx">b</span><span class="p">()</span> <span class="p">)</span> <span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// the gate has no implementation as it's actually</span>
+<span class="c1">// the result of the combination of several NOR gates</span>
+<span class="c1">// and their outputs. We wire all of them on</span>
+<span class="c1">// the setup function.</span>
+<span class="c1">//</span>
+<span class="c1">// Note that the XNOR gate exposes just three ports:</span>
+<span class="c1">// a, b and q.</span>
+<span class="c1">//</span>
+<span class="c1">// However the gates wired inside use some others like</span>
+<span class="c1">// x, m and n. Follow the image above.</span>
+<span class="kd">var</span> <span class="nx">XNOR</span> <span class="o">=</span> <span class="nx">NoR</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">q</span><span class="p">){},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">m</span><span class="p">,</span> <span class="nx">n</span><span class="p">,</span> <span class="nx">q</span><span class="p">){</span>
+  <span class="c1">// Using the new operator on a gate</span>
+  <span class="c1">// simply cretes a copy of that gate</span>
+  <span class="c1">// and we assign each its ports.</span>
+  <span class="k">new</span> <span class="nx">NOR</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">x</span><span class="p">)</span>
+  <span class="k">new</span> <span class="nx">NOR</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">m</span><span class="p">)</span>
+  <span class="k">new</span> <span class="nx">NOR</span><span class="p">(</span><span class="nx">b</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span>
+  <span class="k">new</span> <span class="nx">NOR</span><span class="p">(</span><span class="nx">m</span><span class="p">,</span> <span class="nx">n</span><span class="p">,</span> <span class="nx">q</span><span class="p">)</span>
+<span class="p">})</span>
+</pre></div>
 
 <h3>On the server</h3>
 
@@ -90,6 +288,16 @@ Licensed under the MIT license.</p>
       </section>
     </div>
 
-    
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-33940392-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
   </body>
 </html>

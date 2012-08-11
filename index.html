@@ -99,9 +99,9 @@ to be called on success and/or error.</p>
 
 <div class="highlight"><pre><span class="kd">var</span> <span class="nx">complex</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">some</span><span class="p">,</span> <span class="nx">thing</span><span class="p">,</span> <span class="nx">callback</span><span class="p">){</span>
    <span class="k">if</span><span class="p">(</span><span class="nx">everythingGoesFine</span><span class="p">)</span> <span class="p">{</span>
-     <span class="nx">callback</span><span class="p">(</span><span class="nx">successValue</span><span class="p">,</span> <span class="nx">errorValue</span><span class="p">)</span>
-   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
      <span class="nx">callback</span><span class="p">(</span><span class="nx">successValue</span><span class="p">,</span> <span class="kc">null</span><span class="p">)</span>
+   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+     <span class="nx">callback</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">errorValue</span><span class="p">)</span>
    <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>

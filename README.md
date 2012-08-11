@@ -180,13 +180,16 @@ NOR.b(false) // here we are changing the value of the b cell
 The `NoR` function form is:
 
 ```javascript
-NoR(gate, optional_setup)
+NoR(gate, optional_setup, optional_self)
 ```
 
 Where `gate` is a function that receives *cells* and is invoked
 whenever one of them changes. An `optional_setup` can be a function
 that receives the same *cells* than `gate` for the sake of setting up
-cell subscriptions or creating inner gates.
+cell subscriptions or creating inner gates. If a value for
+`optional_self` if given it will be wrapped on an special *cell* named
+`self` and its value will be used as `this` whenever `gate` gets
+called, of course changing the gate's self will trigger its evaluation.
 
 For example, to build an `XOR` gate using just the universal `NOR`
 gate, you can do:

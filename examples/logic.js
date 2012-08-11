@@ -21,41 +21,32 @@ var NOT = NoR(function(a, g){}, function(a, g){
   new NOR(a, a, g)
 })
 
-var OR = NoR(function(a, b, q){}, function(a, b, x){
+var OR = NoR(function(a, b, q){}, function(a, b, q, x){
   new NOR(a, b, x)
-}, function(x, q){
   new NOT(x, q) // same as new NOR(x, x, q)
 })
 
-var AND = NoR(function(a, b, q){}, function(a, x){
+var AND = NoR(function(a, b, q){}, function(a, b, q, x, y){
   new NOR(a, a, x)
-}, function(b, y){
   new NOR(b, b, y)
-}, function(x, y, q){
   new NOR(x, y, q)
 })
 
-var NAND = NoR(function(a, b, q){}, function(a, b, x){
+var NAND = NoR(function(a, b, q){}, function(a, b, q, x){
   new AND(a, b, x)
-}, function(x, q){
   new NOT(x, q)
 })
 
-var XOR = NoR(function(a, b, q){}, function(a, b, x){
+var XOR = NoR(function(a, b, q){}, function(a, b, x, y, q){
   new AND(a, b, x)
-}, function(a, b, y){
   new NOR(a, b, y)
-}, function(x, y, q){
   new NOR(x, y, q)
 })
 
-var XNOR = NoR(function(a, b, q){}, function(a, b, x){
+var XNOR = NoR(function(a, b, q){}, function(a, b, x, m, n, q){
   new NOR(a, b, x)
-}, function(a, x, m){
   new NOR(a, x, m)
-}, function(b, x, n){
   new NOR(b, x, n)
-}, function(m, n, q){
   new NOR(m, n, q)
 })
 

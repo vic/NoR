@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>Nor by vic</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Nor</h1>
+        <h2>There's No Return. A javascript reactive programming engine.</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/vic/NoR/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/vic/NoR/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/vic/NoR" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>NoR - There's No Return.</h1>
+
+<p>A reactive programming engine for javascript.</p>
+
+<h2>Getting Started</h2>
+
+<h3>On the server</h3>
+
+<p>Install the module with: <code>npm install NoR</code></p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">NoR</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'NoR'</span><span class="p">);</span>
+<span class="nx">NoR</span><span class="p">.</span><span class="nx">awesome</span><span class="p">();</span> <span class="c1">// "awesome"</span>
+</pre></div>
+
+<h3>In the browser</h3>
+
+<p>Download the <a href="https://raw.github.com/vic/NoR/master/dist/NoR.min.js">production version</a> or the <a href="https://raw.github.com/vic/NoR/master/dist/NoR.js">development version</a>.</p>
+
+<p>In your web page:</p>
+
+<div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"dist/NoR.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="nx">awesome</span><span class="p">();</span> <span class="c1">// "awesome"</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+
+<p>In your code, you can attach NoR's methods to any object.</p>
+
+<div class="highlight"><pre><span class="nt">&lt;script&gt;</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">Bocoup</span><span class="p">.</span><span class="nx">utils</span><span class="p">;</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"dist/NoR.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="nx">Bocoup</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">awesome</span><span class="p">();</span> <span class="c1">// "awesome"</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+
+<h2>Documentation</h2>
+
+<p><em>(Coming soon)</em></p>
+
+<h2>Examples</h2>
+
+<p>See the <a href="https://github.com/vic/NoR/tree/master/examples">examples/</a> directory.</p>
+
+<h2>Contributing</h2>
+
+<p>In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using <a href="https://github.com/cowboy/grunt">grunt</a>.</p>
+
+<p><em>Also, please don't edit files in the "dist" subdirectory as they are generated via grunt. You'll find source code in the "lib" subdirectory!</em></p>
+
+<h2>Release History</h2>
+
+<p><em>(Nothing yet)</em></p>
+
+<h2>License</h2>
+
+<p>Copyright (c) 2012 Victor Borja
+Licensed under the MIT license.</p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>

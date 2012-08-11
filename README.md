@@ -30,9 +30,9 @@ A lot of libraries handle reacting to changes, from using
 [jQuery][jquery] to act upon a browser event, [Backbone.js][backbone]
 and [Knockout.js][knockout] to bind your view and model, etc.
 
-[jquery] http://jquery.com
-[knockout] http://knokoutjs.com
-[backbone] http://backbone.org
+[jquery]: http://jquery.com
+[knockout]: http://knokoutjs.com
+[backbone]: http://backbone.org
 
 ## There's No Return
 
@@ -89,7 +89,7 @@ each output the function can have.
 
 How does this all relates to `NoR` and `reactive programming`?, read on.
 
-[nor] http://en.wikipedia.org/wiki/NOR_logic
+[nor]: http://en.wikipedia.org/wiki/NOR_logic
 
 ## Reacting to change
 
@@ -135,10 +135,12 @@ var NOR = NoR(function(a, b, q){
 Looks pretty much like our previous implementation, the only
 difference being that the function is wrapped with `NoR`.
 What `NoR` does is creating a *cell* for each function parameter.
+
 A *cell* is just something that looks like a function and serves to
 hold a value. When a cell is given no arguments, it just returns its
 current value, but when an argument is given to it, it sets its new
 value and notifies everyone interested on that cell of its change.
+
 In our example, `a`, `b` and `c` are cells, but only the first two are
 used as inputs, the third as an output.
 
@@ -151,10 +153,16 @@ NOR(false, true) ; => undefined
 
 However it doesnt act as one of those functions that return values or
 accept callbacks. What we have just did is simply setting the `a` *cell*
-to `true` and the `b` *cell* to `false`. The result ofhe operation is
-asynchronous, that is, we can be sure in what exact second we have the
-response. Instead we have to listen for changes on `c`by *subscribing*
-to it.
+to `true` and the `b` *cell* to `false`. The result of the operation is
+asynchronous, that is, we cant be sure in what exact second we have the
+response.
+
+Just like with *promises* we have something that represents a value in
+the future, we dont know exactly when, but it *will* hold the response
+value.
+
+So what we do for using the value of `c` is to listen for changes
+on `c` by *subscribing* to it.
 
 For example:
 
@@ -163,7 +171,7 @@ NOR.c.subscribe(function(newC){
   console.log("OK, the new value of c is", newC)
 })
 
-NOR.b(false) // here we are changing just b
+NOR.b(false) // here we are changing the value of the b cell
 
 // sometime in the future we see
 // a message printed to stdout.
@@ -176,7 +184,7 @@ NoR(gate, optional_setup)
 ```
 
 Where `gate` is a function that receives *cells* and is invoked
-whenever one of them changes. And `optional_setup` can be a function
+whenever one of them changes. An `optional_setup` can be a function
 that receives the same *cells* than `gate` for the sake of setting up
 cell subscriptions or creating inner gates.
 
@@ -232,25 +240,12 @@ In your web page:
 
 ```html
 <script src="dist/NoR.min.js"></script>
-<script>
-awesome(); // "awesome"
-</script>
-```
-
-In your code, you can attach NoR's methods to any object.
-
-```html
-<script>
-this.exports = Bocoup.utils;
-</script>
-<script src="dist/NoR.min.js"></script>
-<script>
-Bocoup.utils.awesome(); // "awesome"
-</script>
 ```
 
 ## Documentation
-_(Coming soon)_
+Use our [wiki][wiki].
+
+[examples]: https://github.com/vic/NoR/wiki
 
 ## Examples
 
@@ -259,12 +254,25 @@ See the [examples/][examples] directory.
 [examples]: https://github.com/vic/NoR/tree/master/examples
 
 ## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt](https://github.com/cowboy/grunt).
 
-_Also, please don't edit files in the "dist" subdirectory as they are generated via grunt. You'll find source code in the "lib" subdirectory!_
+All contributions are welcome, of course you [fork][fork] the proyect
+do some changes on what you are interested, new features, typos,
+tests, examples or anything you want and finally you can send a
+[pull request][pulls] and I'll be more than grateful to you.
 
-## Release History
-_(Nothing yet)_
+[fork]: https://github.com/vic/NoR/fork_select
+[pulls]: https://github.com/vic/NoR/pulls
+
+## Developing
+
+First get a [fork][fork] of `NoR` and install its development
+dependencies.
+
+```shell
+$ npm install
+```
+
+To run specs use the `npm test` command.
 
 ## License
 Copyright (c) 2012 Victor Borja

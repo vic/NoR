@@ -243,9 +243,10 @@ In your web page:
 ```
 
 ## Documentation
+
 Use our [wiki][wiki].
 
-[examples]: https://github.com/vic/NoR/wiki
+[wiki]: https://github.com/vic/NoR/wiki
 
 ## Examples
 

@@ -26,10 +26,12 @@
     "node": "*"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "mocha"
   },
   "devDependencies": {
-    "grunt": "~0.3.12"
+    "grunt": "~0.3.12",
+    "mocha": "*",
+    "chai": "*"
   },
   "keywords": []
 }

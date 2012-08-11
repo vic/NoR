@@ -42,7 +42,10 @@ Bocoup.utils.awesome(); // "awesome"
 _(Coming soon)_
 
 ## Examples
-See in [examples/](tree/master/examples) directory.
+
+See the [examples/][examples] directory.
+
+[examples]: https://github.com/vic/NoR/tree/master/examples
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt](https://github.com/cowboy/grunt).

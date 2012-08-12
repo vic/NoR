@@ -180,14 +180,14 @@ NOR.b(false) // here we are changing the value of the b cell
 The `NoR` function form is:
 
 ```javascript
-NoR(gate, optional_setup, optional_self)
+NoR(gate, wiring, self)
 ```
 
 Where `gate` is a function that receives *cells* and is invoked
-whenever one of them changes. An `optional_setup` can be a function
+whenever one of them changes. An `wiring` function can be specified
 that receives the same *cells* than `gate` for the sake of setting up
 cell subscriptions or creating inner gates. If a value for
-`optional_self` if given it will be wrapped on an special *cell* named
+`self` if given it will be wrapped on an special *cell* named
 `self` and its value will be used as `this` whenever `gate` gets
 called, of course changing the gate's self will trigger its evaluation.
 

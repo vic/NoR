@@ -253,7 +253,11 @@ Use our [wiki][wiki].
 
 ## Examples
 
-See the [examples/][examples] directory.
+See the [examples/][examples] directory and try running some of them.
+
+```shell
+$ node examples/ten_times.js
+```
 
 [examples]: https://github.com/vic/NoR/tree/master/examples
 

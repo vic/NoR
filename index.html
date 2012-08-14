@@ -198,14 +198,14 @@ on <code>c</code> by <em>subscribing</em> to it.</p>
 
 <p>The <code>NoR</code> function form is:</p>
 
-<div class="highlight"><pre><span class="nx">NoR</span><span class="p">(</span><span class="nx">gate</span><span class="p">,</span> <span class="nx">optional_setup</span><span class="p">,</span> <span class="nx">optional_self</span><span class="p">)</span>
+<div class="highlight"><pre><span class="nx">NoR</span><span class="p">(</span><span class="nx">gate</span><span class="p">,</span> <span class="nx">wiring</span><span class="p">,</span> <span class="nx">self</span><span class="p">)</span>
 </pre></div>
 
 <p>Where <code>gate</code> is a function that receives <em>cells</em> and is invoked
-whenever one of them changes. An <code>optional_setup</code> can be a function
+whenever one of them changes. An <code>wiring</code> function can be specified
 that receives the same <em>cells</em> than <code>gate</code> for the sake of setting up
 cell subscriptions or creating inner gates. If a value for
-<code>optional_self</code> if given it will be wrapped on an special <em>cell</em> named
+<code>self</code> if given it will be wrapped on an special <em>cell</em> named
 <code>self</code> and its value will be used as <code>this</code> whenever <code>gate</code> gets
 called, of course changing the gate's self will trigger its evaluation.</p>
 
@@ -263,7 +263,14 @@ gate, you can do:</p>
 
 <h2>Examples</h2>
 
-<p>See the <a href="https://github.com/vic/NoR/tree/master/examples">examples/</a> directory.</p>
+<p>See the <a href="https://github.com/vic/NoR/tree/master/examples">examples/</a> directory and try running some of them.</p>
+
+<div class="highlight"><pre><span class="nv">$ </span>node examples/ten_times.js
+</pre></div>
+
+<p>An example on how to implement a <a href="http://hyperphysics.phy-astr.gsu.edu/hbase/electronic/jkflipflop.html#c2">JK flip-flop</a> can be found <a href="https://github.com/vic/NoR/blob/master/examples/jk-flipflop.js">here</a></p>
+
+<p><img src="http://hyperphysics.phy-astr.gsu.edu/hbase/electronic/ietron/jk2.gif" alt="JK flip flip"></p>
 
 <h2>Contributing</h2>
 

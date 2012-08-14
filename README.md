@@ -259,7 +259,13 @@ See the [examples/][examples] directory and try running some of them.
 $ node examples/ten_times.js
 ```
 
+An example on how to implement a [JK flip-flop][jk] can be found [here][jke]
+
+![JK flip flip](http://hyperphysics.phy-astr.gsu.edu/hbase/electronic/ietron/jk2.gif)
+
+[jk]: http://hyperphysics.phy-astr.gsu.edu/hbase/electronic/jkflipflop.html#c2
 [examples]: https://github.com/vic/NoR/tree/master/examples
+[jke]: https://github.com/vic/NoR/blob/master/examples/jk-flipflop.js
 
 ## Contributing
 

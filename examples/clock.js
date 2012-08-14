@@ -24,11 +24,18 @@ var counter = new NoR(function(clock, count){
   this.count.isOutput = true
 })
 
-var c = clock(true, false, 300)
+var c = clock(true, false, 600)
 var n = counter(c.signal, 0)
+
+
+c.signal.subscribe(function(high){
+  process.stdout.write(high && '/' || '\\')
+  process.stdout.write(high && '‾' || '_')
+})
+
 n.count.subscribe(function(time){
-  console.log("SIGNAL on time", time, c.signal())
   if(time > 9) {
+    console.log("")
     c.enable(false)
   }
 })

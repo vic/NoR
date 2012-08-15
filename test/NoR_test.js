@@ -58,7 +58,7 @@ describe("NoR", function(){
       expect(x.length).to.equal(0)
     })
 
-    it("is triggered when any of the gate arguments (cells) change", function(){
+    it("is triggered when any of the gate arguments (cells) change", function(done){
       var x = 0
       var n = new NoR(function(a, b, c){
         x += 1
@@ -76,6 +76,8 @@ describe("NoR", function(){
           n(1, 2, 3)
           setTimeout(function(){
             expect(x).to.equal(3)
+
+            done()
           }, 1)
 
         }, 1)
@@ -84,7 +86,7 @@ describe("NoR", function(){
 
     describe("called as function", function(){
 
-      it("sets its exported gates to the given values", function(){
+      it("sets its exported gates to the given values", function(done){
         var x = 0
         var n = new NoR(function(a, b, c){
           x = a() + b() + c()
@@ -93,6 +95,8 @@ describe("NoR", function(){
         n(1, 2, 3)
         setTimeout(function(){
           expect(x).to.equal(6)
+
+          done()
         }, 1)
       })
 
@@ -128,13 +132,15 @@ describe("NoR", function(){
 
     })
 
-    it("is executed having this set to the gate object", function(){
+    it("is executed having this set to the gate object", function(done){
       var x
       var n = new NoR(function(a){ x = this })
       expect(x).to.be.undefined
       n.a(99)
       setTimeout(function(){
         expect(x).to.equal(n)
+
+        done()
       }, 1)
     })
 
@@ -150,7 +156,7 @@ describe("NoR", function(){
         expect(n.self()).to.equal(99)
       })
 
-      it("on change triggers gate execution", function(){
+      it("on change triggers gate execution", function(done){
         var x
         var n = new NoR(function(){
           x = this.self()
@@ -160,6 +166,8 @@ describe("NoR", function(){
         n.self(88)
         setTimeout(function(){
           expect(x).to.equal(88)
+
+          done()
         }, 1)
       })
 
@@ -193,6 +201,44 @@ describe("NoR", function(){
       var n = NoR(function(a){}, function(b){ x = b() })
       new n(10)
       expect(x).to.equal(10)
+    })
+
+    it("can bind a cell to execute the gate on change", function(done){
+      var x
+      var n = new NoR(function(){
+        x = this.b()
+      }, function(b) {
+        b.subscribe(this)
+        this.b = b
+      })
+      n.b(99)
+      setTimeout(function(){
+        expect(x).to.equal(99)
+        done()
+      }, 2)
+    })
+
+    it("can set a cell not to execute the gate on change", function(done){
+      var x = 0, y
+      var n = new NoR(function(a, b){
+        x += 1
+        y = a()
+      }, function(b) {
+        b.unsubscribe(this)
+      })
+      n.a(99)
+      setTimeout(function(){
+        expect(n.a()).to.equal(99)
+        expect(x).to.equal(1)
+        expect(y).to.equal(99)
+
+        n.b(10)
+        setTimeout(function(){
+          expect(x).to.equal(1)
+          expect(y).to.equal(99)
+          done()
+        }, 1)
+      }, 1)
     })
 
   })

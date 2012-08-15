@@ -20,8 +20,7 @@ var counter = NoR(function(clock, count){
 }, function(){
   // mark the count cell so it doent
   // trigger counter execution again
-  // mark it as an outputOnly cell.
-  this.count.isOutput = true
+  this.count.unsubscribe(this)
 })
 
 var c = clock(true, false, 600)

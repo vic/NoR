@@ -1,6 +1,6 @@
 var NoR = require('../lib/NoR.js')
 
-var clock = new NoR(function(signal, enable){}, function(time){
+var clock = NoR(function(signal, enable){}, function(time){
   var timeout, enable = this.enable, signal = this.signal
   tick = function() {
     signal(! signal() )
@@ -15,7 +15,7 @@ var clock = new NoR(function(signal, enable){}, function(time){
   })
 })
 
-var counter = new NoR(function(clock, count){
+var counter = NoR(function(clock, count){
   count( count() + 1 )
 }, function(){
   // mark the count cell so it doent

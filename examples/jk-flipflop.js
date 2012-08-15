@@ -1,20 +1,20 @@
 // http://hyperphysics.phy-astr.gsu.edu/hbase/electronic/jkflipflop.html#c3
 var NoR = require('../lib/NoR.js')
 
-var NAND = new NoR(function(a, b, q){
+var NAND = NoR(function(a, b, q){
   q( !( a() && b() ) )
 }, function(){
   this.q.isOutput = true // dont trigger execution if q changes
 })
 
-var NAND3 = new NoR(function(a, b, c, q){
+var NAND3 = NoR(function(a, b, c, q){
   q( !( a() && b() && c() ) )
 }, function(){
   this.q.isOutput = true // dont trigger execution if q changes
 })
 
 
-var JK = new NoR(function(clock, j, k, q, Q){}, function(clock, j, k, q, Q){
+var JK = NoR(function(clock, j, k, q, Q){}, function(clock, j, k, q, Q){
 
   var A = NAND3(), B = NAND3(), C = NAND(), D = NAND()
 
@@ -37,7 +37,7 @@ var JK = new NoR(function(clock, j, k, q, Q){}, function(clock, j, k, q, Q){
 })
 
 
-var Clock = new NoR(function(signal, enable){}, function(time){
+var Clock = NoR(function(signal, enable){}, function(time){
   var timeout, enable = this.enable, signal = this.signal
   tick = function() {
     signal(! signal() )

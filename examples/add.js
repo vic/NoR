@@ -1,6 +1,6 @@
 var NoR = require('../lib/NoR.js');
 
-var add = NoR(function(a, b, c){
+var add = new NoR(function(a, b, c){
   c( a() + b() )
 })
 

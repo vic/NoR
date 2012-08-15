@@ -1,6 +1,6 @@
 var NoR = require('../lib/NoR.js');
 
-var identity = NoR(function(a, b){}, function(a, b){ a.bind(b) })
+var identity = new NoR(function(a, b){}, function(a, b){ a.bind(b) })
 
 identity.b.subscribe(function(x) { console.log("VALUE IS ", x) })
 

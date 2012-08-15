@@ -18,36 +18,36 @@ var NOR = NoR(function(a, b, g){
 
 // The NOT gate built with a NOR gate.
 var NOT = NoR(function(a, g){}, function(a, g){
-  new NOR(a, a, g)
+  NOR(a, a, g)
 })
 
 var OR = NoR(function(a, b, q){}, function(a, b, q, x){
-  new NOR(a, b, x)
-  new NOT(x, q) // same as new NOR(x, x, q)
+  NOR(a, b, x)
+  NOT(x, q) // same as new NOR(x, x, q)
 })
 
 var AND = NoR(function(a, b, q){}, function(a, b, q, x, y){
-  new NOR(a, a, x)
-  new NOR(b, b, y)
-  new NOR(x, y, q)
+  NOR(a, a, x)
+  NOR(b, b, y)
+  NOR(x, y, q)
 })
 
 var NAND = NoR(function(a, b, q){}, function(a, b, q, x){
-  new AND(a, b, x)
-  new NOT(x, q)
+  AND(a, b, x)
+  NOT(x, q)
 })
 
 var XOR = NoR(function(a, b, q){}, function(a, b, x, y, q){
-  new AND(a, b, x)
-  new NOR(a, b, y)
-  new NOR(x, y, q)
+  AND(a, b, x)
+  NOR(a, b, y)
+  NOR(x, y, q)
 })
 
 var XNOR = NoR(function(a, b, q){}, function(a, b, x, m, n, q){
-  new NOR(a, b, x)
-  new NOR(a, x, m)
-  new NOR(b, x, n)
-  new NOR(m, n, q)
+  NOR(a, b, x)
+  NOR(a, x, m)
+  NOR(b, x, n)
+  NOR(m, n, q)
 })
 
 

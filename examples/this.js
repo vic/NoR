@@ -10,8 +10,8 @@ var Person = function(name) {
 var victor = new Person("Victor")
 var hugo = new Person("Hugo")
 
-var hello = NoR(function(you){
-  console.log(this.hello(you()))
+var hello = new NoR(function(you){
+  console.log(this.self().hello(you()))
 }, null, victor)
 
 hello(hugo)

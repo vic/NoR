@@ -121,7 +121,7 @@ var NOR = function(a, b, q) {
 }
 ```
 
-## How does it works
+## How it works
 
 Using the `NoR` function to create a *gate* that reacts
 to changes on its inputs, and our NOR gate is:

@@ -31,8 +31,8 @@ A lot of libraries handle reacting to changes, from using
 and [Knockout.js][knockout] to bind your view and model, etc.
 
 [jquery]: http://jquery.com
-[knockout]: http://knokoutjs.com
-[backbone]: http://backbone.org
+[knockout]: http://knockoutjs.com
+[backbone]: http://backbonejs.org
 
 ## There's No Return
 
